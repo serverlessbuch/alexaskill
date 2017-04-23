@@ -33,7 +33,7 @@ public class MySpeechlet implements Speechlet {
 
     public SpeechletResponse onLaunch(LaunchRequest request, Session session) throws SpeechletException {
         log.info("onLaunch requestId={}, sessionId={}", request.getRequestId(), session.getSessionId());
-        return speechletAskResponse(SpeechTexts.welcomeText());
+        return speechletAskResponse("Start", SpeechTexts.welcomeText());
     }
 
     public SpeechletResponse onIntent(IntentRequest request, Session session) throws SpeechletException {
@@ -45,13 +45,13 @@ public class MySpeechlet implements Speechlet {
 
         switch (intentName) {
             case INTENT_AUTHOR:
-                return speechletAskResponse(SpeechTexts.authorText());
+                return speechletAskResponse(intentName, SpeechTexts.authorText());
             case INTENT_CHAPTER:
-                return speechletAskResponse(SpeechTexts.chapterText());
+                return speechletAskResponse(intentName, SpeechTexts.chapterText());
             case INTENT_HELP:
-                return speechletAskResponse(SpeechTexts.helpText());
+                return speechletAskResponse(intentName, SpeechTexts.helpText());
             case INTENT_STOP:
-                return speechletTellResponse(SpeechTexts.endText());
+                return speechletTellResponse(intentName, SpeechTexts.endText());
             default:
                 throw new SpeechletException("Invalid Intent " + intentName);
         }
@@ -61,21 +61,21 @@ public class MySpeechlet implements Speechlet {
         log.info("onSessionEnded requestId={}, sessionId={}", request.getRequestId(), session.getSessionId());
     }
 
-    private SpeechletResponse speechletTellResponse(String text) {
-        SimpleCard card = createCard(text);
+    private SpeechletResponse speechletTellResponse(String title, String text) {
+        SimpleCard card = createCard(title, text);
         PlainTextOutputSpeech speech = createSpeech(text);
         return SpeechletResponse.newTellResponse(speech, card);
     }
 
-    private SpeechletResponse speechletAskResponse(String text) {
-        SimpleCard card = createCard(text);
+    private SpeechletResponse speechletAskResponse(String title, String text) {
+        SimpleCard card = createCard(title, text);
         PlainTextOutputSpeech speech = createSpeech(text);
         return SpeechletResponse.newAskResponse(speech, createReprompt(), card);
     }
 
-    private SimpleCard createCard(String text) {
+    private SimpleCard createCard(String title, String text) {
         SimpleCard card = new SimpleCard();
-        card.setTitle("Serverless Buch");
+        card.setTitle(title);
         card.setContent(text);
         return card;
     }
