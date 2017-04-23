@@ -1,0 +1,48 @@
+{
+  "intents": [
+    {
+      "name": "AMAZON.CancelIntent",
+      "samples": []
+    },
+    {
+      "name": "AMAZON.HelpIntent",
+      "samples": []
+    },
+    {
+      "name": "AMAZON.StopIntent",
+      "samples": []
+    },
+    {
+      "name": "Author",
+      "samples": [
+        "Autor",
+        "Wert ist der Autor",
+        "Gib mir Informationen über den Autor",
+        "über den Autor"
+      ],
+      "slots": []
+    },
+    {
+      "name": "Chapter",
+      "samples": [
+        "Kapitel",
+        "Inhaltsverzeichnis",
+        "Welche Kapitel gibt es",
+        "Nenne mir die Kapitel",
+        "Gib mit die Kapitel",
+        "Sag mir das Inhaltsverzeichnis",
+        "Nenne mir das Inhaltsverzeichnis",
+        "Wie lautet das Inhaltsverzeichnis"
+      ],
+      "slots": []
+    },
+    {
+      "name": "ServerlessBuch",
+      "samples": [
+        "Was ist das Serverless Buch",
+        "Serverless Buch"
+      ],
+      "slots": []
+    }
+  ]
+}
