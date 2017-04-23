@@ -29,7 +29,6 @@ public class MySpeechlet implements Speechlet {
 
     public void onSessionStarted(SessionStartedRequest request, Session session) throws SpeechletException {
         log.info("onSessionStarted requestId={}, sessionId={}", request.getRequestId(), session.getSessionId());
-        log.info("User {} - {}", session.getUser().getUserId(), session.getUser().getAccessToken());
     }
 
     public SpeechletResponse onLaunch(LaunchRequest request, Session session) throws SpeechletException {
@@ -40,27 +39,22 @@ public class MySpeechlet implements Speechlet {
     public SpeechletResponse onIntent(IntentRequest request, Session session) throws SpeechletException {
         log.info("onIntent requestId={}, sessionId={}", request.getRequestId(), session.getSessionId());
 
-            Intent intent = request.getIntent();
-            if (null != intent) {
-                log.info("intent: {}", intent.getName());
-                intent.getSlots().forEach((k, v) -> log.info("slot {}: {} = {}", k, v.getName(), v.getValue()));
-            } else {
-                log.warn("no intent");
-            }
-            String intentName = intent.getName();
+        Intent intent = request.getIntent();
+        String intentName = intent.getName();
+        log.info("intent: {}", intentName);
 
-            switch (intentName) {
-                case INTENT_AUTHOR:
-                    return speechletAskResponse(SpeechTexts.authorText());
-                case INTENT_CHAPTER:
-                    return speechletAskResponse(SpeechTexts.chapterText());
-                case INTENT_HELP:
-                    return speechletAskResponse(SpeechTexts.helpText());
-                case INTENT_STOP:
-                    return speechletTellResponse(SpeechTexts.endText());
-                default:
-                    throw new SpeechletException("Invalid Intent " + intentName);
-            }
+        switch (intentName) {
+            case INTENT_AUTHOR:
+                return speechletAskResponse(SpeechTexts.authorText());
+            case INTENT_CHAPTER:
+                return speechletAskResponse(SpeechTexts.chapterText());
+            case INTENT_HELP:
+                return speechletAskResponse(SpeechTexts.helpText());
+            case INTENT_STOP:
+                return speechletTellResponse(SpeechTexts.endText());
+            default:
+                throw new SpeechletException("Invalid Intent " + intentName);
+        }
     }
 
     public void onSessionEnded(SessionEndedRequest request, Session session) throws SpeechletException {
