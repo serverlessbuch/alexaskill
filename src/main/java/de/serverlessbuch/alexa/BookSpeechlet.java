@@ -18,9 +18,9 @@ import org.slf4j.LoggerFactory;
 /**
  * @author Niko Köbler, http://www.n-k.de, @dasniko
  */
-public class MySpeechlet implements Speechlet {
+public class BookSpeechlet implements Speechlet {
 
-    private static final Logger log = LoggerFactory.getLogger(MySpeechlet.class);
+    private static final Logger log = LoggerFactory.getLogger(BookSpeechlet.class);
 
     private static final String INTENT_AUTHOR = "Author";
     private static final String INTENT_CHAPTER = "Chapter";
